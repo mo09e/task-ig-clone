@@ -1,0 +1,7 @@
+  <h3><%= @user.name %></h3>
+  <p><%= image_tag @user.image.url %></p>
+  <p><%= @user.nickname %></p>
+  <p><%= @user.birthday %></p>
+  <p><%= @user.email %></p>
+
+  <%= link_to 'Edit', edit_user_path(@user.id) %>
