@@ -10,8 +10,7 @@ module InstagramClone
     config.active_record.default_timezone = :local
     config.load_defaults 5.2
     config.generators do |g|
-      # この二行の記述で自動生成しない設定を作成しています。
-      # g.assets false
+      g.assets false
       g.helper false
     end
 

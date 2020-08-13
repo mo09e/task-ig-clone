@@ -1,7 +1,11 @@
   <h3><%= @user.name %></h3>
-  <p><%= image_tag @user.image.url %></p>
-  <p><%= @user.nickname %></p>
-  <p><%= @user.birthday %></p>
-  <p><%= @user.email %></p>
+  <% if @user.image? %>
+    <p><%= image_tag(@user.image.url, :size => "80x80") %></p>
+  <% else %>
+    <p><%= image_tag("/assets/default.png", :size => "80x80") %></p>
+  <% end %>
+  <p>Nickname:<%= @user.nickname %></p>
+  <p>Birthday<%= @user.birthday %></p>
+  <p>Email:<%= @user.email %></p>
 
   <%= link_to 'Edit', edit_user_path(@user.id) %>
