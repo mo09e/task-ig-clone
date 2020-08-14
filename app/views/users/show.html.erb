@@ -8,4 +8,7 @@
   <p>Birthday<%= @user.birthday %></p>
   <p>Email:<%= @user.email %></p>
 
-  <%= link_to 'Edit', edit_user_path(@user.id) %>
+  <% if @current_user.id == @user.id %>
+    <%= link_to "Edit", edit_user_path(@user.id) %>
+    <%= link_to 'Delete', new_user_path, method: :delete, data: { confirm: '本当に削除してもいいですか？' }%>
+  <% end %>
