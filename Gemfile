@@ -22,6 +22,10 @@ gem 'mini_magick'
 
 gem 'bcrypt', '3.1.11'
 
+group :development do
+  gem 'letter_opener_web'
+end
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

@@ -2,7 +2,6 @@ class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   before_action :current_user
   before_action :authenticate_user
-  # before_action :check_contents, only:[:edit, :update, :destroy]
 
   # GET /pictures
   # GET /pictures.json
@@ -34,6 +33,7 @@ class PicturesController < ApplicationController
     @picture = current_user.pictures.build(picture_params)
     respond_to do |format|
       if @picture.save
+        ContactPictureMailer.contact_picture_mail(@picture).deliver
         format.html { redirect_to @picture, notice: 'Picture was successfully created.' }
         format.json { render :show, status: :created, location: @picture }
       else
