@@ -1,0 +1,7 @@
+ <%= @user.nickname %>
+
+<% @favorites.each do |favorite| %>
+  <p><%= favorite.picture.user.nickname %></p>
+  <p><%= image_tag favorite.picture.post_image.url, size: '200x200' %></p>
+  <P><%= favorite.picture.content %></p>
+<% end %>

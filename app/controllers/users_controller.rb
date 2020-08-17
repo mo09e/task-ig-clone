@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :favorites]
   before_action :check_user, only: [:edit, :update, :destroy]
   before_action :current_user
-  before_action :authenticate_user
 
   def new
     @user = User.new
@@ -31,6 +30,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def favorites
+    @favorites = Favorite.where(user_id: @user)
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :nickname, :email, :birthday, :image, :image_cache,
@@ -39,5 +42,12 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def check_user
+    if current_user.id != @user.id
+      flash[:notice] = ("権限がありません")
+      redirect_to user_path
+    end
   end
 end

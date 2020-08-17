@@ -13,12 +13,12 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
-  def check_user
-    if @current_user != @user
-      flash[:notice] = t("プロフィールの編集権限がありません")
-      redirect_to pictures_path
-    end
-  end
+  # def check_user
+  #   if @current_user != @user
+  #     flash[:notice] = t("プロフィールの編集権限がありません")
+  #     redirect_to pictures_path
+  #   end
+  # end
 
   # def check_contents
   #   if @current_user != @picture.user_id
