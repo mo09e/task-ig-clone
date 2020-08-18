@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     if @current_user == nil
-      flash[:notice] = t('ログインが必要です')
+      flash[:notice] = 'ログインが必要です'
       redirect_to new_session_path
     end
   end
@@ -12,18 +12,4 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
-
-  # def check_user
-  #   if @current_user != @user
-  #     flash[:notice] = t("プロフィールの編集権限がありません")
-  #     redirect_to pictures_path
-  #   end
-  # end
-
-  # def check_contents
-  #   if @current_user != @picture.user_id
-  #     flash[:notice] = t("投稿記事の編集権限がありません")
-  #     redirect_to pictures_path
-  #   end
-  # end
 end

@@ -10,15 +10,30 @@
   </head>
 
   <body>
-    <% if logged_in? %>
-      <%= link_to "Profile", user_path(current_user.id) %>
-      <%= link_to "PostList", pictures_path(current_user.id) %>
-      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
-    <% else %>
-      <%= link_to "Sign up", new_user_path %>
-      <%= link_to "Login", new_session_path %>
-    <% end %>
-    <p id="notice"><%= notice %></p>
-    <%= yield %>
+    <header class="sticky-top">
+      <div calss="header_layout">
+          <h3 class="logo"><%= link_to "InstagramClone", new_session_path %></h3>
+          <p id="notice"><%= notice %></p>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3" id="side">
+          <% if logged_in? %>
+            <p class="side_link"><%= link_to "Profile", user_path(current_user.id) %></p>
+            <p class="side_link"><%= link_to "PostList", pictures_path(current_user.id) %></p>
+            <p class="side_link"><%= link_to "Logout", session_path(current_user.id), method: :delete %></p>
+          <% else %>
+            <p class="side_link"><%= link_to "Sign up", new_user_path %></p>
+            <p class="side_link"><%= link_to "Login", new_session_path %></p>
+          <% end %>
+        </div>
+        <div class="col-md-9">
+          <br>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>

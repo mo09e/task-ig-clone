@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
   def check_user
     if current_user.id != @user.id
-      flash[:notice] = ("権限がありません")
+      flash[:notice] = `権限がありません。`
       redirect_to user_path
     end
   end

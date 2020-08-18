@@ -6,7 +6,7 @@ class PicturesController < ApplicationController
   # GET /pictures
   # GET /pictures.json
   def index
-    @pictures = Picture.all
+    @pictures = Picture.all.order(id: "DESC")
   end
 
   # GET /pictures/1
@@ -32,21 +32,20 @@ class PicturesController < ApplicationController
   # POST /pictures.json
   def create
     @picture = current_user.pictures.build(picture_params)
-    respond_to do |format|
+    if params[:back]
+      render :new
+    else
       if @picture.save
-        ContactPictureMailer.contact_picture_mail(@picture).deliver
-        format.html { redirect_to @picture, notice: 'Picture was successfully created.' }
-        format.json { render :show, status: :created, location: @picture }
+        redirect_to pictures_path, notice: "Picture was successfully created"
       else
-        format.html { render :new }
-        format.json { render json: @picture.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
 
   def confirm
     @picture = current_user.pictures.build(picture_params)
-    render :new if @bpicture.invalid?
+    render :new if @picture.invalid?
   end
 
   # PATCH/PUT /pictures/1

@@ -1,33 +1,44 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Pictures</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Post image</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @pictures.each do |picture| %>
-      <tr>
-        <td><%= picture.content %></td>
-        <td><%= image_tag picture.post_image.url %></td>
-        <td><%= picture.user.name %></td>
-        <td><%= link_to 'Show', picture %></td>
-        <% if current_user.id == picture.user_id %>
-          <td><%= link_to 'Edit', edit_picture_path(picture), data: { confirm: '本当に編集しますか？' } %></td>
-          <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <br>
-
-<%= link_to 'New Picture', new_picture_path %>
+<div class="main-layout container">
+  <br>
+  <div class="main-icon">
+    <%= link_to image_tag("/assets/face.png") , user_path(current_user.id), class: 'img-logo', alt: 'プロフィール' %>
+    <%= link_to image_tag("/assets/camera.png") , new_picture_path, class: 'img-logo', alt: '新規投稿' %>
+  </div>
+  <div class="row">
+    <div class="col-sm-9 col-lg-8">
+  <table>
+    <tbody>
+      <% @pictures.each do |picture| %>
+        <tr>
+          <th id="side">User</th>
+          <td><%= picture.user.nickname %></td>
+        </tr>
+        <tr>
+          <th id="side">Content</th>
+          <td><%= picture.content %></td>
+        </tr>
+        <tr>
+          <th id="side"></th>
+          <td><%= image_tag picture.post_image.url %></td>
+        </tr>
+        <tr>
+          <th id="side">created at</th>
+          <th><%= picture.created_at %></th>
+        </tr>
+        <tr>
+          <th colspan="2" id="post-select">
+            <ul class="post-menu">
+              <li><span class="label label-danger"><%= link_to 'Show', picture %></span></li>
+              <% if current_user.id == picture.user_id %>
+                <li><span class="label label-danger"><%= link_to 'Edit', edit_picture_path(picture), data: { confirm: '本当に編集しますか？' } %></span></li>
+                <li><span class="label label-danger"><%= link_to 'Destroy', picture, method: :delete, data: { confirm: '本当に削除しますか？' } %></span></li>
+              <% end %>
+            </ul>
+          </th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<br>
+</div>

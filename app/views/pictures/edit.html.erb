@@ -1,6 +1,12 @@
-<h1>Editing Picture</h1>
-
-<%= render 'form', picture: @picture %>
-
-<%= link_to 'Show', @picture %> |
-<%= link_to 'Back', pictures_path %>
+<div class="container" id="main_post">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <br>
+      <h3>Editing</h3>
+      <%= render 'form', picture: @picture %>
+      <br>
+      <%= link_to 'Show', @picture, class: 'btn btn-danger' %>
+      <%= link_to 'Back', pictures_path, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>

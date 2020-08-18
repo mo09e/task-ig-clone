@@ -1,7 +1,13 @@
- <%= @user.nickname %>
+<div class="container" id="main_post">
+  <div class="row">
+    <div class="col-md-6">
+      <%= @user.nickname %>
 
-<% @favorites.each do |favorite| %>
-  <p><%= favorite.picture.user.nickname %></p>
-  <p><%= image_tag favorite.picture.post_image.url, size: '200x200' %></p>
-  <P><%= favorite.picture.content %></p>
-<% end %>
+      <% @favorites.each do |favorite| %>
+      <p>user:<%= favorite.picture.user.nickname %></p>
+      <P>content:<%= favorite.picture.content %></p>
+      <p><%= image_tag favorite.picture.post_image.url, size: '200x200' %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

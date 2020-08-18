@@ -1,11 +1,19 @@
-<h3>確認画面</h3>
-<%= form_with(model: @picture, url: picutures_path, local: true) do |form| %>
-  <p>content:<%= @picture.content %></p>
-  <%= image_tag(@picuture.post_image.url) if @picuture.post_image && @picture.post_image.url %>
-  <%= form.hidden_field :post_image_cache %>
-  <%= form.submit "投稿する" %>
+<%= form_with(model: @picture, local: true) do |form| %>
+<div class="container" id="main_post">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <h3>Please confirm</h3>
+        <%= form.hidden_field :content %>
+        <p>content:<%= @picture.content %></p>
+        <%= image_tag(@picture.post_image.url) if @picture.post_image && @picture.post_image.url %>
+        <%= form.hidden_field :post_image_cache %>
+        <br>
+        <%= form.submit "To post!", class: "btn btn-warning" %>
 <% end %>
-  <%= form_with(model:@picuture, url:new_picuture_path, local:true, method:"get") do |form| %>
-  <%= form.hidden_field :post_image_cache %>
-  <%= form.submit "戻る", name: "back" %>
-<% end %>
+        <%= form_with(model:@piuture, url:new_picture_path, local:true, method:"get") do |form| %>
+          <%= form.hidden_field :post_image_cache %>
+          <%= link_to 'Back', pictures_path, class: 'btn btn-danger' %>
+        <% end %>
+    </div>
+  </div>
+</div>
