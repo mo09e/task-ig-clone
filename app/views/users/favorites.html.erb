@@ -1,7 +1,7 @@
 <div class="container" id="main_post">
   <div class="row">
     <div class="col-md-6">
-      <%= @user.nickname %>
+      <h3><%= @user.nickname %>さんのお気に入り一覧</h3>
 
       <% @favorites.each do |favorite| %>
       <p>user:<%= favorite.picture.user.nickname %></p>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :favorites]
-  before_action :check_user, only: [:edit, :update, :destroy]
+  before_action :check_user, only: [:edit, :update]
   before_action :current_user
 
   def new
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user.id)
+      redirect_to user_path(@user.id), notice: "ユーザー情報を編集しました！"
     else
       render :edit
     end
@@ -46,8 +46,7 @@ class UsersController < ApplicationController
 
   def check_user
     if current_user.id != @user.id
-      flash[:notice] = `権限がありません。`
-      redirect_to user_path
+      redirect_to user_path, notice: "権限がありません。"
     end
   end
 end
