@@ -26,6 +26,8 @@ gem 'pry-rails'
 gem 'better_errors'
 gem 'binding_of_caller'
 
+gem 'faker'
+
 group :development do
   gem 'letter_opener_web'
 end
