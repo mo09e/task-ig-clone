@@ -48,8 +48,15 @@ header a {
 .logo {
   width: 100px;
   float: left;
-  margin-left: 20%;
+  margin-left: 20px;
   font-size: 3rem;
+  text-align: center;
+}
+
+.header_menu {
+  display: inline-block;
+  margin-top: 10px;
+  padding-left: 150px;
   text-align: center;
 }
 
@@ -145,5 +152,5 @@ header a {
   color: #F37606;
   display: inline-block;
   margin-top: 30px;
-  padding-left: 300px;
+  padding-left: 200px;
 }
