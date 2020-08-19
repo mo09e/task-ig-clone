@@ -35,7 +35,7 @@ class PicturesController < ApplicationController
     @picture = current_user.pictures.build(picture_params)
     respond_to do |format|
       if @picture.save
-        # ContactPictureMailer.contact_picture_mail(@picture).deliver
+        ContactPictureMailer.contact_picture_mail(@picture).deliver
         format.html { redirect_to pictures_path, notice: '新規投稿しました' }
         format.json { render :show, status: :created, location: @picture }
       else
