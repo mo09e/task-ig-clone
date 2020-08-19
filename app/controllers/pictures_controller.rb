@@ -2,6 +2,7 @@ class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   before_action :current_user
   before_action :authenticate_user
+  before_action :check_picture, only: [:edit, :update, :destroy]
 
   # GET /pictures
   # GET /pictures.json
@@ -32,13 +33,14 @@ class PicturesController < ApplicationController
   # POST /pictures.json
   def create
     @picture = current_user.pictures.build(picture_params)
-    if params[:back]
-      render :new
-    else
+    respond_to do |format|
       if @picture.save
-        redirect_to pictures_path, notice: "投稿しました！"
+        ContactPictureMailer.contact_picture_mail(@picture).deliver
+        format.html { redirect_to pictures_path, notice: '新規投稿しました' }
+        format.json { render :show, status: :created, location: @picture }
       else
-        render :new
+        format.html { render :new }
+        format.json { render json: @picture.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -73,13 +75,17 @@ class PicturesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_picture
-      @picture = Picture.find(params[:id])
-    end
+  def set_picture
+    @picture = Picture.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def picture_params
-      params.require(:picture).permit(:content, :post_image, :post_image_cache, :user_id)
+  def picture_params
+    params.require(:picture).permit(:content, :post_image, :post_image_cache, :user_id)
+  end
+
+  def check_picture
+    if current_user.id != @picture.user.id
+      redirect_to pictures_path, notice: "権限がありません。"
     end
+  end
 end
